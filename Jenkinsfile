@@ -16,21 +16,22 @@ pipeline {
   }
   
   stages {
-    stage('Clone repository') {
-        /* Let's make sure we have the repository cloned to our workspace */
+    stage('Build') {
+      steps {
+        echo 'Building...'
+      }
     }
-
-    stage('Building image') {
+    stage('Build image') {
       steps{
         script {
           docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
-    stage('Test image') {
-        /* Ideally, we would run a test framework against our image.
-         * For this example, we're using a Volkswagen-type approach ;-) */
-
+    stage('Test') {
+      steps {
+        echo 'Testing...'
+      }
     }
   }
   post {
