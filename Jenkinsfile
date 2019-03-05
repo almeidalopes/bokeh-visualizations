@@ -10,20 +10,27 @@ pipeline {
     buildDiscarder(logRotator(numToKeepStr: '10'))
     timestamps()
   }
+  environment {
+    registry = "almeidalopes/bokeh-visualizations"
+    registryCredential = 'docker-hub-credentials'
+  }
+  
   stages {
     stage('Build') {
       steps {
-        echo 'Building'
+        echo 'Building...'
+      }
+    }
+    stage('Build image') {
+      steps{
+        script {
+          docker.build registry + ":$BUILD_NUMBER"
+        }
       }
     }
     stage('Test') {
       steps {
-        echo 'Testing'
-      }
-    }
-    stage('Deploy') {
-      steps {
-        echo 'Deploying'
+        echo 'Testing...'
       }
     }
   }
