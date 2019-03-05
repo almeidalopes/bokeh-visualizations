@@ -18,7 +18,7 @@ pipeline {
   stages {
     stage('Build') {
       steps {
-        echo 'Building...'
+        checkout scm
       }
     }
     stage('Build image') {
