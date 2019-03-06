@@ -19,6 +19,7 @@ pipeline {
     stage('Build') {
       steps {
         checkout scm
+        git pull
       }
     }
     stage('Build image') {
